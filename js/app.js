@@ -41,16 +41,39 @@ addEventListener('keyup', function(e) {
   delete keysDown[e.keyCode];
 }, false);
 
+
 //===============================================
 
-// Update sprites 
+// Update sprites
 var update = function(modifier) {
   if (37 in keysDown) { // User holding left
     player.x -= player.speed * modifier;
   }
 
+  if (40 in keysDown) { // User holding down
+    player.y += player.speed * modifier;
+  }
+
+  if (38 in keysDown) { // User holding up
+    player.y -= player.speed * modifier;
+  }
+
   if (39 in keysDown) { // User holding right
     player.x += player.speed * modifier;
+  }
+
+  //canvas boundraies
+  if (player.x >= canvas.width - playerImage.width -1){
+      player.x = canvas.width - playerImage.width -1;
+  }
+  if (player.x <= 1){
+      player.x = 1;
+  }
+  if (player.y >= canvas.height - playerImage.height -1){
+      player.y = canvas.height - playerImage.height -1;
+  }
+  if (player.y <= 1){
+      player.y = 1;
   }
 };
 
@@ -65,6 +88,19 @@ var render = function() {
   if (playerReady) {
     ctx.drawImage(playerImage, player.x, player.y);
   }
+
+//   ctx.fillText("Time:" + c);
+
+//   function createCountDown(timeRemaining) {
+//     var startTime = Date.now();
+//     return function() {
+//        return timeRemaining - ( Date.now() - startTime );
+//     }
+// };
+
+//    var currentCountDown = createCountDown(30000);
+
+
 };
 
 //===============================================
