@@ -24,8 +24,8 @@ playerImage.src = 'img/test.png';
 // Sprites
 var player = {
   speed: 300,
-  x: 375,
-  y: 375
+  x: 205,
+  y: 525
 };
 
 //===============================================
