@@ -15,7 +15,7 @@ var bgImage = new Image();
 bgImage.onload = function() {
   bgReady = true;
 };
-bgImage.src = 'img/backgroundtest.png';
+bgImage.src = 'img/crane.png';
 
 // Player Image
 var playerReady = false;
@@ -25,15 +25,15 @@ playerImage.onload = function() {
 };
 playerImage.src = 'img/test.png';
 
-// Energy Image
+// score Image
 
-var energyReady = false;
-var energyImage = new Image;
-energyImage.onload = function () {
-  energyImage = true;
+var scoreReady = false;
+var scoreImage = new Image;
+scoreImage.onload = function () {
+  scoreImage = true;
 };
 
-energyImage.src = 'img/crane.png';
+scoreImage.src = 'img/raindrop.png';
 
 
 //===============================================
@@ -45,8 +45,8 @@ var player = {
   // y: 525
 };
 
-var energy = {};
-var energyAmp = 0;
+var score = {};
+var scoreAmp = 0;
 
 var obstacle1 = {
   x: 180, y: 300,w: 32,h:32, type:"obstacle"}
@@ -71,19 +71,19 @@ addEventListener('keyup', function(e) {
 
 //===============================================
 
-// reset game when player Amps up on Energy
+// reset game when player Amps up on score
 var reset = function () {
   player.x = canvas.width /2;
   player.y = canvas.height /2;
   player.w = 32;
   player.h = 32;
 
-  // Random energy objects
-  energy.w = 32;
-  energy.h = 32;
+  // Random score objects
+  score.w = 32;
+  score.h = 32;
 
-  energy.x = 32 + (Math.random() * (canvas.width - 64));
-  energy.y = 32 + (Math.random() * (canvas.height - 64));
+  score.x = 32 + (Math.random() * (canvas.width - 64));
+  score.y = 32 + (Math.random() * (canvas.height - 64));
 
 };
 
@@ -109,11 +109,11 @@ var update = function(modifier) {
   }
 
   if (
-    player.x <= (energy.x + 32)
-    && energy.x <= (player.x + 32)
-    && player.y <= (energy.y + 32)
+    player.x <= (score.x + 32)
+    && score.x <= (player.x + 32)
+    && player.y <= (score.y + 32)
     ){
-      ++energyAmp;
+      ++scoreAmp;
       reset();
   }
 
@@ -144,6 +144,10 @@ var render = function() {
 
   if (playerReady) {
     ctx.drawImage(playerImage, player.x, player.y);
+  }
+
+  if (scoreReady) {
+    ctx.drawImage(scoreImage, score.x, score.y);
   }
 
 //   ctx.fillText("Time:" + c);
