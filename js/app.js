@@ -23,7 +23,7 @@ var playerImage = new Image();
 playerImage.onload = function() {
   playerReady = true;
 };
-playerImage.src = 'img/test.png';
+playerImage.src = 'img/test.gif';
 
 // score Image
 
@@ -130,6 +130,19 @@ var update = function(modifier) {
   }
   if (player.y <= 1){
       player.y = 1;
+  }
+
+  if (score.x >= canvas.width - scoreImage.width -10){
+      score.x = canvas.width - scoreImage.width -10;
+  }
+  if (score.x <= 10){
+      score.x = 10;
+  }
+  if (score.y >= canvas.height - scoreImage.height -10){
+      score.y = canvas.height - scoreImage.height -10;
+  }
+  if (score.y <= 10){
+      score.y = 10;
   }
 };
 
