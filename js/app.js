@@ -15,7 +15,7 @@ var bgImage = new Image();
 bgImage.onload = function() {
   bgReady = true;
 };
-bgImage.src = 'img/crane.png';
+bgImage.src = 'img/backgroundtest.png';
 
 // Player Image
 var playerReady = false;
@@ -30,10 +30,10 @@ playerImage.src = 'img/test.png';
 var scoreReady = false;
 var scoreImage = new Image;
 scoreImage.onload = function () {
-  scoreImage = true;
+  scoreReady = true;
 };
 
-scoreImage.src = 'img/raindrop.png';
+scoreImage.src = 'img/test.png';
 
 
 //===============================================
@@ -85,6 +85,7 @@ var reset = function () {
   score.x = 32 + (Math.random() * (canvas.width - 64));
   score.y = 32 + (Math.random() * (canvas.height - 64));
 
+  console.log("Current score is " + scoreAmp);
 };
 
 
@@ -109,9 +110,9 @@ var update = function(modifier) {
   }
 
   if (
-    player.x <= (score.x + 32)
-    && score.x <= (player.x + 32)
-    && player.y <= (score.y + 32)
+    player.x <= (score.x + score.w)
+    && score.x <= (player.x + player.w)
+    && player.y <= (score.y + score.w)
     ){
       ++scoreAmp;
       reset();
