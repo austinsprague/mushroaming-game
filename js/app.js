@@ -75,15 +75,15 @@ addEventListener('keyup', function(e) {
 var reset = function () {
   player.x = canvas.width /2;
   player.y = canvas.height /2;
-  player.w = 40;
-  player.h = 40;
+  player.w = 32;
+  player.h = 32;
 
   // Random energy objects
-  energy.w = 40;
-  energy.h = 40;
+  energy.w = 32;
+  energy.h = 32;
 
-  energy.x = (Math.random() * (canvas.width - energy.w));
-  energy.y = (Math.random() * (canvas.height - energy.h));
+  energy.x = 32 + (Math.random() * (canvas.width - 64));
+  energy.y = 32 + (Math.random() * (canvas.height - 64));
 
 };
 
@@ -109,13 +109,12 @@ var update = function(modifier) {
   }
 
   if (
-    player.x <= (energy.x + energyImage.width)
-    && energy.x <= (player.x + playerImage.width)
-    && player.y <= (energy.y + energyImage.width)
+    player.x <= (energy.x + 32)
+    && energy.x <= (player.x + 32)
+    && player.y <= (energy.y + 32)
     ){
-    ++energyAmp;
-
-    reset();
+      ++energyAmp;
+      reset();
   }
 
   //canvas boundaries
