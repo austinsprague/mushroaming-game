@@ -122,6 +122,7 @@ var update = function(modifier) {
     player.x += player.speed * modifier;
   }
 
+  // if touching
   if (
     player.x <= (score.x + score.w)
     && score.x <= (player.x + player.w)
