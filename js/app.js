@@ -4,7 +4,7 @@ var ctx = document.getElementById('canvas').getContext('2d');
 canvas.width = 600;
 canvas.height = 450;
 
-document.body.appendChild(canvas);
+// document.body.appendChild(canvas);
 var start = new Date().getTime();
 
 //===============================================
@@ -62,6 +62,13 @@ var keysDown = {};
 
 addEventListener('keydown', function(e) {
   keysDown[e.keyCode] = true;
+
+  // Store scores in local storage
+  // var stringifyScore = JSON.stringify(scoreAmp);
+  // localStorage.setItem = ('storeScore', stringifyScore);
+  // var getScores = localStorage.getItem ('storeScore');
+  // scoreAmp = JSON.parse(getScores);
+
 }, false);
 
 addEventListener('keyup', function(e) {
@@ -71,21 +78,27 @@ addEventListener('keyup', function(e) {
 
 //===============================================
 
-// reset game when player Amps up on score
+// reset game when player scores
 var reset = function () {
   player.x = canvas.width /2;
   player.y = canvas.height /2;
-  player.w =64;
-  player.h = 64;
+  player.w =35;
+  player.h = 15;
 
   // Random score objects
-  score.w = 64;
-  score.h = 64;
+  score.w = 25;
+  score.h = 25;
 
-  score.x = 32 + (Math.random() * (canvas.width - 32));
-  score.y = 32 + (Math.random() * (canvas.height - 32));
+  score.x = 45 + (Math.random() * (canvas.width - score.w));
+  score.y = 45 + (Math.random() * (canvas.height - score.h));
 
   console.log("Current score is " + scoreAmp);
+
+  // var stringifyScore = JSON.stringify(scoreAmp);
+  // localStorage.setItem = ('storeScore', stringifyScore);
+  // var getScores = localStorage.getItem ('storeScore');
+  // scoreAmp = JSON.parse(getScores);
+
 };
 
 
@@ -117,8 +130,8 @@ var update = function(modifier) {
       ++scoreAmp;
       reset();
   }
-
-  //canvas boundaries
+  
+  //Player canvas boundaries
   if (player.x >= canvas.width - playerImage.width -1){
       player.x = canvas.width - playerImage.width -1;
   }
@@ -132,17 +145,18 @@ var update = function(modifier) {
       player.y = 1;
   }
 
-  if (score.x >= canvas.width - scoreImage.width -10){
-      score.x = canvas.width - scoreImage.width -10;
+  //Score canvas boundaries
+  if (score.x >= canvas.width - scoreImage.width -20){
+      score.x = canvas.width - scoreImage.width -20;
   }
-  if (score.x <= 10){
-      score.x = 10;
+  if (score.x <= 20){
+      score.x = 20;
   }
-  if (score.y >= canvas.height - scoreImage.height -10){
-      score.y = canvas.height - scoreImage.height -10;
+  if (score.y >= canvas.height - scoreImage.height -20){
+      score.y = canvas.height - scoreImage.height -20;
   }
-  if (score.y <= 10){
-      score.y = 10;
+  if (score.y <= 20){
+      score.y = 20;
   }
 };
 
@@ -175,6 +189,12 @@ var render = function() {
 
    // var currentCountDown = createCountDown(30000);
 
+   // score
+  ctx.fillStyle = "white";
+  ctx.font = "18px Helvetica";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  ctx.fillText("Mushrooms Gathered: " + scoreAmp, 10, 425);
 
 };
 
