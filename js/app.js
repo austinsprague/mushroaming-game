@@ -1,7 +1,7 @@
 // Canvas
 var ctx = document.getElementById('canvas').getContext('2d');
 
-canvas.width =450;
+canvas.width = 600;
 canvas.height = 450;
 
 document.body.appendChild(canvas);
@@ -15,7 +15,7 @@ var bgImage = new Image();
 bgImage.onload = function() {
   bgReady = true;
 };
-bgImage.src = 'img/backgroundtest.png';
+bgImage.src = 'img/8-bit-seattle-wa.jpg';
 
 // Player Image
 var playerReady = false;
@@ -33,7 +33,7 @@ scoreImage.onload = function () {
   scoreReady = true;
 };
 
-scoreImage.src = 'img/test.png';
+scoreImage.src = 'img/mushroom.png';
 
 
 //===============================================
@@ -75,15 +75,15 @@ addEventListener('keyup', function(e) {
 var reset = function () {
   player.x = canvas.width /2;
   player.y = canvas.height /2;
-  player.w = 32;
-  player.h = 32;
+  player.w =64;
+  player.h = 64;
 
   // Random score objects
-  score.w = 32;
-  score.h = 32;
+  score.w = 64;
+  score.h = 64;
 
-  score.x = 32 + (Math.random() * (canvas.width - 64));
-  score.y = 32 + (Math.random() * (canvas.height - 64));
+  score.x = 32 + (Math.random() * (canvas.width - 32));
+  score.y = 32 + (Math.random() * (canvas.height - 32));
 
   console.log("Current score is " + scoreAmp);
 };
