@@ -4,9 +4,6 @@ var ctx = document.getElementById('canvas').getContext('2d');
 canvas.width = 600;
 canvas.height = 450;
 
-// document.body.appendChild(canvas);
-var start = new Date().getTime();
-
 //===============================================
 
 // Background
@@ -17,7 +14,7 @@ bgImage.onload = function() {
 };
 bgImage.src = 'img/8-bit-seattle-wa.jpg';
 
-// Player Image
+// Player image
 var playerReady = false;
 var playerImage = new Image();
 playerImage.onload = function() {
@@ -25,60 +22,72 @@ playerImage.onload = function() {
 };
 playerImage.src = 'img/test.gif';
 
-// score Image
-
+// Score image
 var scoreReady = false;
 var scoreImage = new Image;
 scoreImage.onload = function () {
   scoreReady = true;
 };
-
 scoreImage.src = 'img/mushroom.png';
 
+// Title screen
+var offset = 0;
+var titleReady = false;
+var titleImage = new Image();
+titleImage.onload = function() {
+  titleReady = true;
+};
+titleImage.src = "img/title.png";
+
+// Game over screen
+var gameoverReady = false;
+var gameoverImage = new Image();
+gameoverReady.onload = function() {
+  gameoverReady = true;
+};
+gameoverImage.src = "img/gameover.png";
 
 //===============================================
 
 // Game Objects
 var player = {
   speed: 300,
-  // x: 205,
-  // y: 525
 };
 
 var score = {};
 var scoreAmp = 0;
-
 var obstacle1 = {
   x: 180, y: 300,w: 32,h:32, type:"obstacle"}
 
 var obstacles = [obstacle1]
 
-
-
 //===============================================
 
 // Keyboard controls
-var keysDown = {};
+var keysDown = {};     // Keydown = true | Keyup = false
+var keysDown2 = {};     // keydown = true
 
 addEventListener('keydown', function(e) {
   keysDown[e.keyCode] = true;
-
-  // Store scores in local storage
-  // var stringifyScore = JSON.stringify(scoreAmp);
-  // localStorage.setItem = ('storeScore', stringifyScore);
-  // var getScores = localStorage.getItem ('storeScore');
-  // scoreAmp = JSON.parse(getScores);
-
 }, false);
 
 addEventListener('keyup', function(e) {
   delete keysDown[e.keyCode];
 }, false);
 
+addEventListener('keydown', function(e) {
+  keysDown2[e.keyCode] = true;
+});
+
+// Store scores in local storage*******************************************
+// var stringifyScore = JSON.stringify(scoreAmp);
+// localStorage.setItem = ('storeScore', stringifyScore);
+// var getScores = localStorage.getItem ('storeScore');
+// scoreAmp = JSON.parse(getScores);
 
 //===============================================
 
-// reset game when player scores
+// Reset game when player scores
 var reset = function () {
   player.x = canvas.width /2;
   player.y = canvas.height /2;
@@ -94,13 +103,12 @@ var reset = function () {
 
   console.log("Current score is " + scoreAmp);
 
-  // var stringifyScore = JSON.stringify(scoreAmp);
+  // var stringifyScore = JSON.stringify(scoreAmp);************************
   // localStorage.setItem = ('storeScore', stringifyScore);
   // var getScores = localStorage.getItem ('storeScore');
   // scoreAmp = JSON.parse(getScores);
 
 };
-
 
 //===============================================
 
@@ -121,6 +129,8 @@ var update = function(modifier) {
   if (39 in keysDown) { // User holding right
     player.x += player.speed * modifier;
   }
+
+  //===============================================
 
   // if touching
   if (
@@ -146,7 +156,9 @@ var update = function(modifier) {
       player.y = 1;
   }
 
-  //Score canvas boundaries
+  //===============================================
+
+  // Score canvas boundaries
   if (score.x >= canvas.width - scoreImage.width -20){
       score.x = canvas.width - scoreImage.width -20;
   }
@@ -161,42 +173,63 @@ var update = function(modifier) {
   }
 };
 
+//===============================================
 
+// Timer
+var target_date = new Date().getTime();
+
+// Variable for seconds
+var seconds = 0;
+
+// Count up function
+setInterval(function () {
+
+  // Find the amount of seconds
+  var current_date = new Date().getTime();
+  var seconds_left = (current_date - target_date)/1000 ;
+
+  seconds = parseInt(seconds_left);
+
+}, 1000);
 
 //===============================================
 
 // Draw background and sprites
 var render = function() {
-  if (bgReady) {
+  if (titleReady) {
+    ctx.drawImage(titleImage, 0, 0);
+  }
+
+  if (32 in keysDown2) {     // if space is pressed
     ctx.drawImage(bgImage, 0, 0);
-  }
-
-  if (playerReady) {
-    ctx.drawImage(playerImage, player.x, player.y);
-  }
-
-  if (scoreReady) {
     ctx.drawImage(scoreImage, score.x, score.y);
+    ctx.drawImage(playerImage, player.x, player.y);
+
+    // score
+    ctx.fillStyle = "white";
+    ctx.font = "18px Helvetica";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("Mushrooms Gathered: " + scoreAmp, 10, 425);
+
+    // timer
+    ctx.fillStyle = "white";
+    ctx.font = "18px Helvetica";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("Time: " +  seconds, 10, 20);
   }
 
-//   ctx.fillText("Time:" + c);
+  if (seconds > 60) {     // if seconds is greter than 60 then draw game over screen
+    ctx.drawImage(gameoverImage, 0, 0);
 
-//   function createCountDown(timeRemaining) {
-//     var startTime = Date.now();
-//     return function() {
-//        return timeRemaining - ( Date.now() - startTime );
-//     }
-// };
-
-   // var currentCountDown = createCountDown(30000);
-
-   // score
-  ctx.fillStyle = "white";
-  ctx.font = "18px Helvetica";
-  ctx.textAlign = "left";
-  ctx.textBaseline = "top";
-  ctx.fillText("Mushrooms Gathered: " + scoreAmp, 10, 425);
-
+    // score
+    ctx.fillStyle = "white";
+    ctx.font = "18px Helvetica";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("Mushrooms Gathered: " + scoreAmp, 10, 425);
+  }
 };
 
 //===============================================
@@ -211,20 +244,13 @@ var main = function() {
 
   then = now;
 
-  // Request to do this again ASAP
+  // Request cross-brower support
   requestAnimationFrame(main);
 };
 
 //===============================================
 
-
-
-
-//===============================================
-
-
-
-// Cross-browser support for requestAnimationFrame
+// Cross-browser support
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 
