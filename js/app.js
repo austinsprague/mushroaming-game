@@ -1,6 +1,12 @@
 // Canvas
 var ctx = document.getElementById('canvas').getContext('2d');
 
+canvas.width =450;
+canvas.height = 450;
+
+document.body.appendChild(canvas);
+var start = new Date().getTime();
+
 //===============================================
 
 // Background
@@ -11,7 +17,7 @@ bgImage.onload = function() {
 };
 bgImage.src = 'img/backgroundtest.png';
 
-// Player
+// Player Image
 var playerReady = false;
 var playerImage = new Image();
 playerImage.onload = function() {
@@ -19,14 +25,35 @@ playerImage.onload = function() {
 };
 playerImage.src = 'img/test.png';
 
+// Energy Image
+
+var energyReady = false;
+var energyImage = new Image;
+energyImage.onload = function () {
+  energyImage = true;
+};
+
+energyImage.src = 'img/crane.png';
+
+
 //===============================================
 
-// Sprites
+// Game Objects
 var player = {
   speed: 300,
-  x: 205,
-  y: 525
+  // x: 205,
+  // y: 525
 };
+
+var energy = {};
+var energyAmp = 0;
+
+var obstacle1 = {
+  x: 180, y: 300,w: 32,h:32, type:"obstacle"}
+
+var obstacles = [obstacle1]
+
+
 
 //===============================================
 
@@ -40,6 +67,25 @@ addEventListener('keydown', function(e) {
 addEventListener('keyup', function(e) {
   delete keysDown[e.keyCode];
 }, false);
+
+
+//===============================================
+
+// reset game when player Amps up on Energy
+var reset = function () {
+  player.x = canvas.width /2;
+  player.y = canvas.height /2;
+  player.w = 40;
+  player.h = 40;
+
+  // Random energy objects
+  energy.w = 40;
+  energy.h = 40;
+
+  energy.x = (Math.random() * (canvas.width - energy.w));
+  energy.y = (Math.random() * (canvas.height - energy.h));
+
+};
 
 
 //===============================================
@@ -62,7 +108,17 @@ var update = function(modifier) {
     player.x += player.speed * modifier;
   }
 
-  //canvas boundraies
+  if (
+    player.x <= (energy.x + energyImage.width)
+    && energy.x <= (player.x + playerImage.width)
+    && player.y <= (energy.y + energyImage.width)
+    ){
+    ++energyAmp;
+
+    reset();
+  }
+
+  //canvas boundaries
   if (player.x >= canvas.width - playerImage.width -1){
       player.x = canvas.width - playerImage.width -1;
   }
@@ -76,6 +132,8 @@ var update = function(modifier) {
       player.y = 1;
   }
 };
+
+
 
 //===============================================
 
@@ -121,6 +179,13 @@ var main = function() {
 
 //===============================================
 
+
+
+
+//===============================================
+
+
+
 // Cross-browser support for requestAnimationFrame
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
@@ -129,4 +194,5 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 
 // Run the app
 var then = Date.now();
+reset();
 main();
