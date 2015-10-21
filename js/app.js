@@ -79,12 +79,6 @@ addEventListener('keydown', function(e) {
   keysDown2[e.keyCode] = true;
 });
 
-// Store scores in local storage*******************************************
-// var stringifyScore = JSON.stringify(scoreAmp);
-// localStorage.setItem = ('storeScore', stringifyScore);
-// var getScores = localStorage.getItem ('storeScore');
-// scoreAmp = JSON.parse(getScores);
-
 //===============================================
 
 // Reset game when player scores
@@ -102,11 +96,6 @@ var reset = function () {
   score.y = 45 + (Math.random() * (canvas.height - score.h));
 
   console.log("Current score is " + scoreAmp);
-
-  // var stringifyScore = JSON.stringify(scoreAmp);************************
-  // localStorage.setItem = ('storeScore', stringifyScore);
-  // var getScores = localStorage.getItem ('storeScore');
-  // scoreAmp = JSON.parse(getScores);
 
 };
 
@@ -137,6 +126,7 @@ var update = function(modifier) {
     player.x <= (score.x + score.w)
     && score.x <= (player.x + player.w)
     && player.y <= (score.y + score.w)
+    && score.y <= (player.y + player.w)
     ){
       ++scoreAmp;
       reset();
@@ -168,8 +158,8 @@ var update = function(modifier) {
   if (score.y >= canvas.height - scoreImage.height -20){
       score.y = canvas.height - scoreImage.height -20;
   }
-  if (score.y <= 20){
-      score.y = 20;
+  if (score.y <= 10){
+      score.y = 10;
   }
 };
 
@@ -222,7 +212,7 @@ var render = function() {
   }
 
 
-  if (seconds > 10) {     // if seconds is greater than 60 then draw game over screen
+  if (seconds > 30) {     // if seconds is greater than 60 then draw game over screen
     ctx.drawImage(gameoverImage, 0, 0);
 
     // score
@@ -275,7 +265,7 @@ var printScore=function(){
   for (var i=0;i<scoreList.length;i++){
       $("#scoresContainer").append("<p>"+(i+1)+") "+scoreList[i] + "</p>");
 
-      if (i > 10) {
+      if (i > 30) {
         break; // it will break the loop
       }
 
