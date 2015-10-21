@@ -1,17 +1,83 @@
-body {
-  background-color: black;
+html {
+   margin: 0px;
+   height: 100%;
+   width: 100%;
 }
 
-canvas {
+body {
+   margin: 0px;
+   min-height: 100%;
+   width: 100%;
+   background-color: black;
+}
+
+#canvas {
   display: block;
   margin-top: 50px;
-  margin-right: auto;
-  margin-left: auto;
+  margin-right: 50px;
+  margin-left: 50px;
+  margin-bottom: 20px;
   border: 5px solid #333333;
 }
 
-#topScores {
-	float: left; 
-	display: none;
-	color:white;
+.header, .footer{
+ text-align: center;
+ color: red;
+ text-transform: uppercase;
+ background-color: yellow;
+ width:100%;
+ font-family: 'Orbitron', sans-serif;
+ font-weight: 900;
 }
+
+
+.nav{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: blue;
+  marign:0;
+  padding: 0;
+  width: 100%;
+}
+
+.item{
+  flex-grow: 1;
+  height: 50px;
+  margin: 5px;
+  background: #efefef;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 600;
+  font-family: 'Orbitron', sans-serif;
+}
+
+a:hover{
+  background-color: black
+}
+
+.grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: green;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-image: url("img/8bitseattle.jgp");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+.aside{
+  height:450px;
+  width: 200px;
+  background-color: red;
+  margin: 20px;
+  border: 5px solid black;
+  font-family: 'Orbitron', sans-serif;
+}
+
