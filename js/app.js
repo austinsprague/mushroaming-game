@@ -39,13 +39,17 @@ titleImage.onload = function() {
 };
 titleImage.src = "img/title.png";
 
-// Game over screen
+// Game over and Replay screen
 var gameoverReady = false;
 var gameoverImage = new Image();
 gameoverReady.onload = function() {
   gameoverReady = true;
+  gameoverload = false;
 };
-gameoverImage.src = "img/gameover.png";
+gameoverImage.src = "img/gameoverandrestart.png";
+
+
+
 
 //===============================================
 
@@ -137,11 +141,12 @@ var update = function(modifier) {
     player.x <= (score.x + score.w)
     && score.x <= (player.x + player.w)
     && player.y <= (score.y + score.w)
+    && score.y <= (player.y + player.w)
     ){
       ++scoreAmp;
       reset();
   }
-  
+
   //Player canvas boundaries
   if (player.x >= canvas.width - playerImage.width -1){
       player.x = canvas.width - playerImage.width -1;
@@ -224,6 +229,15 @@ var render = function() {
 
   if (seconds > 10) {     // if seconds is greater than 60 then draw game over screen
     ctx.drawImage(gameoverImage, 0, 0);
+    gameoverload = true;
+
+
+
+
+    if (13 in keysDown2 && gameoverload === true){
+     location.reload();
+    };
+
 
     // score
     ctx.fillStyle = "white";
@@ -281,10 +295,9 @@ var printScore=function(){
 
   }
   $("#topScores").show("slow");
+}
 
 //=============================================================
-
-}
 
 // Main app function
 var main = function() {
