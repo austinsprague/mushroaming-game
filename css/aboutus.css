@@ -1,47 +1,121 @@
+html {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
 
-body{ 
-	background-color: #E6F3ED;
+body {
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+  background-color: black;
+}
+
+#canvas {
+  display: block;
+  margin-top: 50px;
+  margin-right: 50px;
+  margin-left: 50px;
+  margin-bottom: 20px;
+  border: 5px solid #333333;
+}
+
+.header, .footer {
+  text-align: center;
+  color: red;
+  text-transform: uppercase;
+  background-color: black;
+  width:100%;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
 }
 
 
-#header{
+.nav {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: black;
+  marign:0;
+  padding: 0;
+  width: 100%;
+}
+
+.item {
+  flex-grow: 1;
+  height: 50px;
+  margin: 5px;
+  background: red;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 600;
+  font-family: 'Orbitron', sans-serif;
+}
+
+a:hover {
+  background-color: #efefef
+}
+
+.grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-image: url("img/8bitseattle.jgp");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+.aside {
+  height:450px;
+  width: 200px;
+  background-color: green;
+  margin: 20px;
+  border: 5px solid #333333;
+  font-family: 'Orbitron', sans-serif;
+}
+
+#header {
 	background-color: grey;
 	width: 100%;
-    height: 20%;
-    text-align: center;
+  height: 20%;
+  text-align: center;
 }
 
-li{
+li {
 	list-style: none;
 	display: inline-block;
 }
 
-.IntroBox{
+.introbox {
 	width: 936px;
-    height: 226px;
-    background-color: pink;
-    padding-left: 30px;
-    border: 5px solid black;
-    margin: 20px;
+  height: 226px;
+  padding-left: 30px;
+  margin: 20px;
+  background-color: green;
+  border: 5px solid #333333;
+  font-family: 'Orbitron', sans-serif;
 }
 
-.img{
-    width: 217px;
-    height: 187px;
-    background-color: grey;
-    margin: 22px 0px 0px 0px;
+.img {
+    width: 150px;
+    height: 150px;
+    margin: 40px -10px 0px 20px;
     float:left;
 }
 
-.IntroContent{
-	margin: 36px 19px 0px 1px;
-    margin-left: 30%;
+img {
+    border: 5px solid green;
+    border-radius: 125px;
 }
 
-#footer{
-	background-color: grey;
-	width: 100%;
-    height: 20%;
-    font-size: 18px;
-    text-align: center;
+.introcontent {
+	margin: 36px 19px 0px 1px;
+  margin-left: 30%;
 }
