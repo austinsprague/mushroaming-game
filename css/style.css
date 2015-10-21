@@ -9,3 +9,9 @@ canvas {
   margin-left: auto;
   border: 5px solid #333333;
 }
+
+#topScores {
+	float: left; 
+	display: none;
+	color:white;
+}

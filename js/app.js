@@ -194,6 +194,7 @@ setInterval(function () {
 
 //===============================================
 
+var scoreUpdated = false;
 // Draw background and sprites
 var render = function() {
   if (titleReady) {
@@ -220,7 +221,8 @@ var render = function() {
     ctx.fillText("Time: " +  seconds, 10, 20);
   }
 
-  if (seconds > 60) {     // if seconds is greter than 60 then draw game over screen
+
+  if (seconds > 10) {     // if seconds is greater than 60 then draw game over screen
     ctx.drawImage(gameoverImage, 0, 0);
 
     // score
@@ -229,10 +231,60 @@ var render = function() {
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     ctx.fillText("Mushrooms Gathered: " + scoreAmp, 10, 425);
+
+//====================== Stop the render function timer=================
+
+    if (scoreUpdated === false) { // only add once
+      scoreUpdated = true;
+      addScore(scoreAmp);
+      printScore();
+    }
+
   }
+
+};
+//====================== Score - Local Storage=================
+var scoreList =[];
+
+var addScore=function(scoreAmp){
+  scoreList.push(scoreAmp);
+  saveScoreListToBrowser();
 };
 
-//===============================================
+$(window).load(function() {
+      ScoreInputFromBrowser();
+});
+
+
+var ScoreInputFromBrowser = function() {
+  var getScore = localStorage.getItem('jsonScore');
+  if (getScore != null) {
+    scoreList = JSON.parse(getScore);
+  }
+}
+
+var saveScoreListToBrowser = function(){
+    var jsonObject = JSON.stringify(scoreList);
+    localStorage.setItem('jsonScore',jsonObject);
+};
+
+var printScore=function(){
+
+  scoreList.sort(function(a,b) { return b - a; });
+
+  for (var i=0;i<scoreList.length;i++){
+      $("#scoresContainer").append("<p>"+(i+1)+") "+scoreList[i] + "</p>");
+
+      if (i > 10) {
+        break; // it will break the loop
+      }
+
+  }
+  $("#topScores").show("slow");
+
+//=============================================================
+
+}
 
 // Main app function
 var main = function() {
