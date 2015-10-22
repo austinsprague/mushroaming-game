@@ -4,6 +4,13 @@ var ctx = document.getElementById('canvas').getContext('2d');
 canvas.width = 600;
 canvas.height = 450;
 
+// Sound effects
+var titleSound = new Audio('audio/title.mp3');
+var gatherSound = new Audio('audio/gather.wav');
+var gameoverSound = new Audio('audio/gameover.mp3');
+var titleSoundSwitch = true;
+var gameoverSoundSwitch = true;
+
 //===============================================
 
 // Background
@@ -44,24 +51,19 @@ var gameoverReady = false;
 var gameoverImage = new Image();
 gameoverReady.onload = function() {
   gameoverReady = true;
-  gameoverload = false;
+  gameoverLoad = false;
 };
-gameoverImage.src = "img/gameoverandrestart.png";
+gameoverImage.src = "img/gameover.png";
 
 //===============================================
 
 // Game Objects
 var player = {
-  speed: 300,
+  speed: 350,
 };
 
 var score = {};
 var scoreAmp = 0;
-
-// var obstacle1 = {
-//   x: 180, y: 300,w: 32,h: 32, type:"obstacle"}
-
-// var obstacles = [obstacle1]
 
 //===============================================
 
@@ -123,13 +125,14 @@ var update = function(modifier) {
 
   //===============================================
 
-  // if touching
+  // if player is touching mushroom
   if (
     player.x <= (score.x + score.w)
     && score.x <= (player.x + player.w)
     && player.y <= (score.y + score.w)
     && score.y <= (player.y + player.w)
     ) {
+      gatherSound.play();     // Sound effect
       ++scoreAmp;
       reset();
   };
@@ -184,7 +187,10 @@ var interval = setInterval(function() {
 
 //===============================================
 
+// High score boolean
 var scoreUpdated = false;
+
+//===============================================
 
 // Draw background and sprites
 var render = function() {
@@ -196,6 +202,11 @@ var render = function() {
     ctx.drawImage(bgImage, 0, 0);
     ctx.drawImage(scoreImage, score.x, score.y);
     ctx.drawImage(playerImage, player.x, player.y);
+
+    if (titleSoundSwitch === true) {
+      titleSound.play();     // Sound effect
+    };
+    titleSoundSwitch = false;
 
     // Score
     ctx.fillStyle = "white";
@@ -220,9 +231,14 @@ var render = function() {
   if (secondsBool === false) {
     ctx.drawImage(gameoverImage, 0, 0);
 
-    gameoverload = true;
+    if (gameoverSoundSwitch === true) {
+      gameoverSound.play();     // Sound effect
+    };
+    gameoverSoundSwitch = false;
 
-    if (13 in keysDown2 && gameoverload === true) {
+    gameoverLoad = true;     // Boolean to load game over screen
+
+    if (13 in keysDown2 && gameoverLoad === true) {     // if enter is pressed and gameoverLoad is true then reload game
      location.reload();
     };
 
@@ -238,6 +254,7 @@ var render = function() {
     // Stop the render function timer
     if (scoreUpdated === false) {     // Only add once
       scoreUpdated = true;
+      document.getElementById('scoresContainer').innerHTML = '';
       addScore(scoreAmp);
       printScore();
     };
@@ -274,13 +291,8 @@ var printScore = function() {
 
   scoreList.sort(function(a,b) { return b - a; });
 
-  for (var i = 0; i < scoreList.length; i++) {
+  for (var i = 0; i < 5; i++) {     // Appends top 5 high scores
       $("#scoresContainer").append("<p>"+(i + 1)+") "+scoreList[i] + "</p>");
-
-      if (i > 30) {
-        break; //     It will break the loop
-      };
-
   };
   $("#topScores").show("slow");
 };
@@ -313,3 +325,7 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 var then = Date.now();
 reset();
 main();
+
+// Print top 5 high score to html
+ScoreInputFromBrowser();
+printScore();
