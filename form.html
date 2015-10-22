@@ -18,7 +18,7 @@
 
 <!-- NAV -->
 <div class="nav">
-    <div class="item" id="home"><a href="index.html">mushRoaming - Comments</a></div>
+    <div class="item" id="home"><a href="index.html">Home</a></div>
 
     <div class="item" id="aboutus"><a href='aboutus.html'>About Us</a></div>
     <div class="item" id="comments"><a href='form.html'>Comments</a></div>
@@ -27,25 +27,28 @@
 
 
 
-<!-- THE Flex Container STarts -->
+<!-- THE Flex Container Starts -->
 <div id="BigContainer">
 
         <!-- FORM Box Starts-->
      <div id="form-Container" class="aside">
          <form id="form">
             <fieldset>
-                <br>   
-                    <p>What do you think of this game?</p>
-                    <br>
+                <h5>
+                    <label for="username">Name&nbsp;&nbsp;&nbsp;</label></h5>
+                    <input type="text" name="username" id="firstname">
+
+                <br>
+                    <h5>Fan of mushRoaming Game?</h5>
+                    
                     <textarea name="comments" cols="20" rows="4" id="commentTextArea">Enter your comment..</textarea>
                 <br>
 
                 <br>
-                    <label for="username">Your Name:&nbsp;&nbsp;&nbsp;</label>
-                    <input type="text" name="username" id="firstname">
-            
+
+                <input type="submit" value="Submit" id="submit">
                 <input type="reset" id="reset">
-                <input type="submit" value="Send" id="submit"> 
+                 
                 
            </fieldset>
          </form>
@@ -55,6 +58,7 @@
 
 
     <!-- Comment Box Starts-->
+
     <div id="commentAppend" class="aside"></div> 
      <!-- Comment Box Ends-->
 
@@ -63,7 +67,7 @@
 
 
      <!-- FOOTER -->
- <h1 class="footer">&copy; 2015 S.W.A.A.</h1>
+ <footer class="footer"> Created by the S.W.A.A. team</footer>
 
  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
  <script type="text/javascript" src="js/form.js"></script>

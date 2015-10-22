@@ -48,12 +48,17 @@ var displayComments = function() {
     commentHTML = commentHTML.replace("{{comment}}", commentData.comment);
     
     $("#commentAppend").append(commentHTML);
+  
     
   }  
+
 }
 //inputist Object converted into Strings;KeyValue
 var saveInputListToBrowser = function(){
     var jsonObject = JSON.stringify(InputList);
     localStorage.setItem('jsonInput',jsonObject);
 };
+
+
+
 
