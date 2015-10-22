@@ -1,15 +1,17 @@
-<html5>
+<!DOCTYPE html>
+<html>
 
 <head>
   <meta charset="utf-8">
   <title>Test</title>
+  <link href="css/reset.css" type="text/css" rel="stylesheet"/>
   <link href="css/style.css" type="text/css" rel="stylesheet"/>
   <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900,700,500' rel='stylesheet' type='text/css'>
 
 <body>
 
   <header class="header">
-    <h1>Mushroaming Game</h1>
+    <h2>mushRoaming Game</h2>
     </header>
 
 
@@ -21,21 +23,24 @@
 </div>
 
 <div class="grid">
-  <div class="aside" >
-    <p>You've got 30 seconds,<br> gather as many as mushrooms you can!</p>
+  <div class="aside-left" >
+    <h5>How to Play</h5>
+    <h6><p> You've got 30 seconds,<br> gather as many as mushrooms you can!</p>
+    <p>GO!!</p>
+    </h6>
   </div>
   <div>
     <canvas id="canvas"></canvas>
   </div>
-  <div class="aside" id="topScores">
-    <p>High Scores!</p>
-    <div id="scoresContainer"></div>
+  <div class="aside-right" id="topScores">
+    <h5>High Scores</h5>
+    <h6><div id="scoresContainer"></div></h6>
   </div>
 </div>
 
 
 
-<footer class="footer"> Created by S.W.A.A.</footer>
+<footer class="footer"> Created by the S.W.A.A. team</footer>
 
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="js/app.js"></script>
