@@ -38,7 +38,6 @@ scoreImage.onload = function() {
 scoreImage.src = 'img/mushroom.png';
 
 // Title screen
-var offset = 0;
 var titleReady = false;
 var titleImage = new Image();
 titleImage.onload = function() {
@@ -57,11 +56,12 @@ gameoverImage.src = "img/gameover.png";
 
 //===============================================
 
-// Game Objects
+// Player
 var player = {
   speed: 350,
 };
 
+// Mushroom
 var score = {};
 var scoreAmp = 0;
 
@@ -69,7 +69,7 @@ var scoreAmp = 0;
 
 // Event listeners
 var keysDown = {};     // Keydown = true | Keyup = false
-var keysDown2 = {};     // keydown = true
+var keysDown2 = {};     // Keydown = true
 
 addEventListener('keydown', function(e) {
   keysDown[e.keyCode] = true;
@@ -85,19 +85,31 @@ addEventListener('keydown', function(e) {
 
 // To disable space bar and arrow keys for scrolling
 window.addEventListener("keydown", function(e) {
-  if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+  if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
     e.preventDefault();
   }
 }, false);
 
 //===============================================
 
-// Reset game when player scores
+// Reset when player scores
+var playerReset = true;
+
 var reset = function() {
-  player.x = canvas.width / 2;
-  player.y = canvas.height / 2;
-  player.w = 35;
-  player.h = 15;
+  if (playerReset === true) {     // If playReset is true then set player
+    player.x = canvas.width / 2;
+    player.y = canvas.height / 2;
+    player.w = 35;
+    player.h = 15;
+    playerReset = false;
+  };
+
+  if (playerReset === false) {    // If playerReset is false then reset player to current x and y positions
+    player.x = player.x;
+    player.y = player.y
+    player.w = 35;
+    player.h = 15;
+  };
 
   // Random score objects
   score.w = 25;
@@ -132,7 +144,7 @@ var update = function(modifier) {
 
   //===============================================
 
-  // if player is touching mushroom
+  // If player is touching mushroom
   if (
     player.x <= (score.x + score.w)
     && score.x <= (player.x + player.w)
@@ -179,8 +191,8 @@ var update = function(modifier) {
 
 // Timer
 var seconds = 30;     // Countdown from 30 seconds
-var secondsStart = false;     // Start countdown
-var secondsBool = true;     // Boolean to draw game over screen
+var secondsStart = false;     // If secondsStart is true then start countdown
+var secondsBool = true;     // If secondsBool is false then draw game over screen
 
 var interval = setInterval(function() {
   if (secondsStart === true) {
@@ -205,7 +217,7 @@ var render = function() {
     ctx.drawImage(titleImage, 0, 0);
   };
 
-  if (32 in keysDown2) {     // if space is pressed
+  if (32 in keysDown2) {     // If space is pressed
     ctx.drawImage(bgImage, 0, 0);
     ctx.drawImage(scoreImage, score.x, score.y);
     ctx.drawImage(playerImage, player.x, player.y);
@@ -234,7 +246,7 @@ var render = function() {
 
 //===============================================  
   
-  // if timer is less than 0, secondsBool is false, then draw game over screen
+  // If secondsBool is false then draw game over screen
   if (secondsBool === false) {
     ctx.drawImage(gameoverImage, 0, 0);
 
@@ -271,7 +283,7 @@ var render = function() {
 //===============================================
 
 // Local storage for score (jquery)
-var scoreList = [35, 25, 17, 15, 12];
+var scoreList = [35, 31, 27, 25, 20];
 
 var addScore = function(scoreAmp) {
   scoreList.push(scoreAmp);
@@ -321,7 +333,7 @@ var main = function() {
 
 //===============================================
 
-// Cross-browser support
+// Cross browser support (animation or redrawing on canvas)
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 
