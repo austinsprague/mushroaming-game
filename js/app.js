@@ -67,7 +67,7 @@ var scoreAmp = 0;
 
 //===============================================
 
-// Keyboard controls
+// Event listeners
 var keysDown = {};     // Keydown = true | Keyup = false
 var keysDown2 = {};     // keydown = true
 
@@ -83,12 +83,19 @@ addEventListener('keydown', function(e) {
   keysDown2[e.keyCode] = true;
 });
 
+// To disable space bar and arrow keys for scrolling
+window.addEventListener("keydown", function(e) {
+  if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+    e.preventDefault();
+  }
+}, false);
+
 //===============================================
 
 // Reset game when player scores
 var reset = function() {
-  player.x = canvas.width /2;
-  player.y = canvas.height /2;
+  player.x = canvas.width / 2;
+  player.y = canvas.height / 2;
   player.w = 35;
   player.h = 15;
 
@@ -264,7 +271,7 @@ var render = function() {
 //===============================================
 
 // Local storage for score (jquery)
-var scoreList = [];
+var scoreList = [35, 25, 17, 15, 12];
 
 var addScore = function(scoreAmp) {
   scoreList.push(scoreAmp);
@@ -272,7 +279,7 @@ var addScore = function(scoreAmp) {
 };
 
 $(window).load(function() {
-      ScoreInputFromBrowser();
+  ScoreInputFromBrowser();
 });
 
 var ScoreInputFromBrowser = function() {
@@ -283,18 +290,17 @@ var ScoreInputFromBrowser = function() {
 };
 
 var saveScoreListToBrowser = function() {
-    var jsonObject = JSON.stringify(scoreList);
-    localStorage.setItem('jsonScore',jsonObject);
+  var jsonObject = JSON.stringify(scoreList);
+  localStorage.setItem('jsonScore',jsonObject);
 };
 
 var printScore = function() {
-
   scoreList.sort(function(a,b) { return b - a; });
 
   for (var i = 0; i < 5; i++) {     // Appends top 5 high scores
-      $("#scoresContainer").append("<p>"+(i + 1)+") "+scoreList[i] + "</p>");
+    $('#scoresContainer').append('<p>' + (i + 1) + ') '+ scoreList[i] + '</p>');
   };
-  $("#topScores").show("slow");
+  $('#topScores').show('slow');
 };
 
 //=============================================================
