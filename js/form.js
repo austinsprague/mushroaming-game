@@ -3,7 +3,7 @@ var submit = document.getElementById('submit');
 var formUserInfo = function(event){
   event.preventDefault();
   var firstname = document.getElementById('firstname').value;
-  var comment   = document.getElementById('comment').value;
+  var comment   = document.getElementById('commentTextArea').value;
   
   var user = new userDetails(firstname,comment);
   addInput(user);
@@ -42,7 +42,7 @@ var displayComments = function() {
 
   for (var i = 0; i < InputList.length; i++) {
 
-    var commentHTML = '<span class="username">{{username}}</span><p class="comment">{{comment}}</p>';
+    var commentHTML = '<p class="commentJS">"{{comment}}"</p><span class="username">-{{username}}</span><hr></br>';
     var commentData = InputList[i];
     commentHTML = commentHTML.replace("{{username}}", commentData.firstname);
     commentHTML = commentHTML.replace("{{comment}}", commentData.comment);
