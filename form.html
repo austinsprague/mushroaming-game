@@ -1,79 +1,70 @@
- 
- <html>
- <head>
+<!DOCTYPE html>
+<head>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
 
  <link rel="stylesheet" type="text/css" href="css/form.css">
  <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900,700,500' rel='stylesheet' type='text/css'>
 
- </head>
- <body>
+</head>
 
 <body>
 
 <!-- HEADER -->
 <header class="header">
-    <h1>Comments</h1>
+    <h2><img src="img/redred.png" width="60px"> comments</h2>
 </header>
 
 <!-- NAV -->
-<div class="nav">
-    <div class="item" id="home"><a href="index.html">Home</a></div>
+    <div class="nav">
+        <div class="item" id="home"><a href="index.html">Home</a></div>
 
-    <div class="item" id="aboutus"><a href='aboutus.html'>About Us</a></div>
-    <div class="item" id="comments"><a href='form.html'>Comments</a></div>
-</div>
+        <div class="item" id="aboutus"><a href='aboutus.html'>About Us</a></div>
+        <div class="item" id="comments"><a href='form.html'>Comments</a></div>
+    </div>
 
+    <!-- THE Flex Container Starts -->
+    <div id="BigContainer">
 
+            <!-- FORM Box Starts-->
+         <div id="form-Container" class="aside">
+             <form id="form">
+                <fieldset>
+                    <h5>
+                        <label for="username">Name&nbsp;&nbsp;&nbsp;</label></h5>
+                        <input type="text" name="username" id="firstname" placeholder="What's your name?">
 
+                    <br>
+                        <h5>Fan of mushRoaming Game?</h5>
+                        
+                        <textarea name="comments" cols="20" rows="4" id="commentTextArea" placeholder="Tell us how you really feel..."></textarea>
+                    <br>
 
-<!-- THE Flex Container Starts -->
-<div id="BigContainer">
+                    <br>
 
-        <!-- FORM Box Starts-->
-     <div id="form-Container" class="aside">
-         <form id="form">
-            <fieldset>
-                <h5>
-                    <label for="username">Name&nbsp;&nbsp;&nbsp;</label></h5>
-                    <input type="text" name="username" id="firstname">
-
-                <br>
-                    <h5>Fan of mushRoaming Game?</h5>
+                    <input type="submit" value="Submit" id="submit">
+                    <input type="reset" id="reset">
+                     
                     
-                    <textarea name="comments" cols="20" rows="4" id="commentTextArea">Enter your comment..</textarea>
-                <br>
+               </fieldset>
+             </form>
+         </div>
+         <!-- FORM Box Ends-->
 
-                <br>
+        <!-- Comment Box Starts-->
 
-                <input type="submit" value="Submit" id="submit">
-                <input type="reset" id="reset">
-                 
-                
-           </fieldset>
-         </form>
-     </div>
-     <!-- FORM Box Ends-->
+        <div id="commentAppend" class="aside"></div> 
+         <!-- Comment Box Ends-->
 
+    </div>
+    <!-- THE Flex Container Ends -->
 
+         <!-- FOOTER -->
+     <footer class="footer"> Created by the S.W.A.A. team</footer>
 
-    <!-- Comment Box Starts-->
+     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+     <script type="text/javascript" src="js/form.js"></script>
 
-    <div id="commentAppend" class="aside"></div> 
-     <!-- Comment Box Ends-->
+     
+</body>
 
-</div>
-<!-- THE Flex Container Ends -->
-
-
-     <!-- FOOTER -->
- <footer class="footer"> Created by the S.W.A.A. team</footer>
-
- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
- <script type="text/javascript" src="js/form.js"></script>
-
- 
- </body>
-
- </body>
  </html>
