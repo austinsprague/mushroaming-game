@@ -39,6 +39,9 @@ ______________________________________________*/
  font-family: 'Orbitron', sans-serif;
  font-weight: 200;
  padding: 10px;
+ bottom:0;
+ position: fixed;
+ width:100%;
 }
 
 /* Navigation bar
@@ -79,7 +82,7 @@ a {
 
 }
 
-a:hover, a:active ,{
+a:hover, a:active{
   background-color: #424242; 
   color: white;
   border-radius: 5px 5px 0px 0px;
@@ -95,7 +98,7 @@ a:hover, a:active ,{
     display: flex;
     flex-flow: row;
     justify-content: center;
-    color: #c32aff /*#FF6600*/;
+    color:  #D88BF7 /*#c32aff*/ /*#FF6600*/;
 }
 
 #firstname{
